@@ -1,4 +1,4 @@
-#summary Outlines the intra-server Sync API that hydraproject servers use to communicate with one another.
+#summary Outlines the Sync API used for intra-server communication
 #labels Featured
 
 = Introduction =
@@ -78,4 +78,3 @@ The following example uses curl to call the time method, passing in the passkey 
 This function can be used for debugging and testing that authentication is at least working.
 
 In the below examples, the API request function names are
-
