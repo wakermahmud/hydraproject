@@ -40,9 +40,9 @@ Endpoint URLs can be any fully-qualified URL.  Parameters are specified directly
 
 Examples of acceptable API endpoint URLs:
   * http://foo.org/api
-  * https://foo.org/api
   * http://foo.org/hydra/pickles_and_jam/api.py
   * http://api.foo.org/api/index.php
+  * https://foo.org/api    (note the 'https')
 ...
 
 API endpoint URLs must *not* contain a question mark ("?") --  as this will be added by the client when building the request URL.
