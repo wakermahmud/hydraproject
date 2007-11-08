@@ -11,9 +11,9 @@ Each server is solely responsible for keeping its data up to date by making requ
 
 The following will assume that we are an admin of a hydraproject server that will be running on the domain name 'mongoose.com'.  Any valid domain names on the Internet can of course run THP servers.
 
-= Rails-specific Federation YML =
+= Federated Sites List =
 
-Implementors are free to implement the 'federation list' however they see fit.  In the spec rails app, see: config/federation.yml.example.  This is a YAML-encoded file that is simply a list of trusted sites, each with a few required fields and an optinoal ip_required field.
+Implementors are free to implement the 'federation list' of trusted sites however they see fit.  In the spec rails app, see: config/federation.yml.example.  This is a YAML-encoded file that is simply a list of trusted sites, each with a few required fields and an optional ip_required field.
 
 {{{
 --- 
@@ -27,18 +27,55 @@ Implementors are free to implement the 'federation list' however they see fit.  
 }}}
 
 Required fields:
-  * domain - domain name of the server
+  * domain - domain name of the remote server
   * passkey - secret password key used for authentication
   * api_url - fully qualified URL of the remote API endpoint (note: secure connections "https" are allowed and encouraged if possible)
 
 Optional field(s):
   * ip_required - The IP Address of the remote client.  If a different IP than the one listed attempts to make a request, it should be denied.
 
-In the above example
+In the above example, our mongoose.com Hydra server has 2 trusted sites in its network, running on domains foo.org and bar.net.  Requests coming from bar.net should originate from the IP 66.29.132.45 and the API endpoint URL is *https* and is running a PHP implementation of hydraserver.  (just theoretical, at this point)
 
-= Details =
+= Function Calling =
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+Endpoint URLs can be any fully-qualified URL.  Parameters are specified directly after the endpoint URL or as HTTP POST variables.
+
+Examples of acceptable API endpoint URLs:
+  * http://foo.org/api
+  * http://foo.org/hydra/pickles_and_jam/api.py
+  * http://foo.org/api.php
+...
+
+API endpoint URLs must *not* contain a question mark ("?") --  as this will be added by the client when building the request URL.
+
+Which API function is being called is specified via the 'method' parameter passed via the URL string as HTTP Get or via HTTP Post.
+
+The following is a current list of allowed API methods:
+
+['time', 'list_users', 'list_transfer_stats', 'list_torrents', 'get_torrent']
+
+For example, to call the 'time' method on each of the above example, we'd call:
+  * http://foo.org/api?method=time
+  * http://foo.org/hydra/pickles_and_jam/api.py?method=time
+  * http://foo.org/api.php?method=time
+
+= Authentication =
+
+To authenticate, clients must pass their passkey as an additional request parameter.  Note: passkeys must be unique within a network.
+
+Over a secure, *https* connection, passkeys can be passed via HTTP GET, as in the following:
+  * http://foo.org/api?method=time&passkey=bacon69
+
+It is advised though that HTTP POST be used for submitting the 'passkey' parameter to the remote API server.
+
+The following example uses curl to call the time method, passing in the passkey via a POST parameter:
+{{{
+  curl -d "passkey=wafflesandjam69" http://foo.org/api?method=time
+}}}
+
+= Time Function = 
+
+This function can be used for debugging and testing that authentication is at least working.
+
+In the below examples, the API request function names are
+
