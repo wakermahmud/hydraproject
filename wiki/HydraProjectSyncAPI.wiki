@@ -11,7 +11,7 @@ The following will assume that we are an admin of a hydraproject server that wil
 
 = Federated Sites List =
 
-Implementors are free to implement the 'federation list' of trusted sites however they see fit.  In the spec rails app, this is a YAML-encoded file (config/federation.yml.example) that is a list of trusted sites, each with a few required (and optional) fields.
+Implementors are free to implement the 'federation list' of trusted sites however they see fit.  In the spec rails app, this is a YAML-encoded file (see: config/federation.yml.example).
 
 {{{
 --- 
@@ -46,7 +46,7 @@ Examples of acceptable API endpoint URLs:
 
 API endpoint URLs must *not* contain a question mark ("?") --  as this will be added by the client when building the request URL.
 
-Which API function is being called is specified via the 'method' parameter passed via the URL string as HTTP Get or via HTTP Post.
+Which API function is being called is specified via the 'method' parameter passed via the URL string as HTTP GET or via HTTP Post.
 
 For example, to call the 'time' method on each of the above examples, we'd call:
   * http://foo.org/api?method=time
@@ -74,7 +74,7 @@ The following example uses curl to call the time method, passing in the passkey 
   curl -d "passkey=bacon420" http://foo.org/api?method=time
 }}}
 
-= Time Function ("time") = 
+= Time Function (time) = 
 
 This function can be used for debugging and testing (to ensure authentication is working, for example).
 
@@ -95,13 +95,13 @@ Example response:
 
 For brevity, in the following examples we will demonstrate using one example request, wherein the passkey is passed via POST.
 
-= List Users ('list_users') =
+= List Users (list_users) =
 
 Used for both the initial pull of all users (in the case wherein one or more servers have been online for a long time), as well as periodic updates (new user on the remote server who have signed up less than X seconds ago).
 
 === List Users :: First Load ===
 
-The optional parameter "*first_load*" may be passed (value "true") to pull the entire list of users.  It should only be called once; subsequent loads can use time-based diffs.
+The optional parameter *first_load* may be passed (value "true") to pull the entire list of users.  It should only be called once; subsequent loads can use time-based diffs.
 
 List users (first load) request:
 {{{
@@ -121,15 +121,18 @@ Sample response:
     <hashed_password>4738a1db458cab13e5e42c9578d21bed31a900930c179c44746ca8049c87b7a0</hashed_password>
     <salt>275374700.0221938363202334</salt>
   </user>
+  ...
 </users>
 }}}
 
 
 === List Users :: Since X Seconds Ago ===
 
-The 'list_users' command also takes an optional 'since' parameter which should restrict the server to sending only those users created in the last X seconds.
+The *list_users* command also takes an optional *since* parameter which should restrict the server to sending only those users created in the last X seconds.
 
-For example, if we wanted to only receive users created under an hour ago (60*60 or 3600 seconds).
+For example, if we wanted to only receive users created under an hour ago (60*60 or 3600 seconds) we would do something like the following...
+
+_Note: *since* is always relative to the API server's time, not the requesting client's.  It is up to the client to keep track of the last time (X seconds ago) that it ping'd neighboring servers for their latest user additions.)
 
 List users (first load) request:
 {{{
