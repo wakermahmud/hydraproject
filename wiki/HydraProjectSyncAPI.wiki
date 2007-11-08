@@ -1,0 +1,44 @@
+#summary Outlines the Sync API that hydraproject servers use to communicate updates to one another.
+#labels Featured
+
+= Introduction =
+
+The hydraproject Sync API is RESTful, pull-driven and XML friendly.
+
+Each server is solely responsible for keeping its data up to date by making requests to the fellow servers in its "federation".
+
+= Example-based =
+
+The following will assume that we are an admin of a hydraproject server that will be running on the domain name 'mongoose.com'.  Any valid domain names on the Internet can of course run THP servers.
+
+= Rails-specific Federation YML =
+
+Implementors are free to implement the 'federation list' however they see fit.  In the spec rails app, see: config/federation.yml.example.  This is a YAML-encoded file that is simply a list of trusted sites, each with a few required fields and an optinoal ip_required field.
+
+{{{
+--- 
+- domain: foo.org
+  passkey: wafflesandjam69
+  api_url: http://foo.org/api
+- domain: bar.net
+  passkey: pigsinablanket42
+  api_url: https://www.bar.net/hydra/api.php
+  ip_required: 66.29.132.45
+}}}
+
+Required fields:
+  * domain - domain name of the server
+  * passkey - secret password key used for authentication
+  * api_url - fully qualified URL of the remote API endpoint (note: secure connections "https" are allowed and encouraged if possible)
+
+Optional field(s):
+  * ip_required - The IP Address of the remote client.  If a different IP than the one listed attempts to make a request, it should be denied.
+
+In the above example
+
+= Details =
+
+Add your content here.  Format your content with:
+  * Text in *bold* or _italic_
+  * Headings, paragraphs, and lists
+  * Automatic links to other wiki pages
