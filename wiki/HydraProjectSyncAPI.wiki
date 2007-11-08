@@ -1,4 +1,4 @@
-#summary Outlines the Sync API that hydraproject servers use to communicate updates to one another.
+#summary Outlines the intra-server Sync API that hydraproject servers use to communicate with one another.
 #labels Featured
 
 = Introduction =
