@@ -42,7 +42,7 @@ Examples of acceptable API endpoint URLs:
   * http://foo.org/api
   * http://foo.org/hydra/pickles_and_jam/api.py
   * http://api.foo.org/api/index.php
-  * https://foo.org/api    (note the 'https')
+  * https://foo.org/api
 ...
 
 API endpoint URLs must *not* contain a question mark ("?") --  as this will be added by the client when building the request URL.
@@ -53,6 +53,7 @@ For example, to call the 'time' method on each of the above examples, we'd call:
   * http://foo.org/api?method=time
   * http://foo.org/hydra/pickles_and_jam/api.py?method=time
   * http://api.foo.org/api/index.php?method=time
+  * https://foo.org/api?method=time
 
 = List of Allowed Methods =
 
@@ -85,7 +86,7 @@ Example request (passkey embedded in URL):
   curl https://foo.org/api?method=time&passkey=bacon420
 }}}
 
-Example request (passkey passed via POST):
+Example request (same as above):
 {{{
   curl -d "passkey=bacon420" http://foo.org/api?method=time
 }}}
