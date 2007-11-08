@@ -43,7 +43,6 @@ Examples of acceptable API endpoint URLs:
   * http://foo.org/hydra/pickles_and_jam/api.py
   * http://api.foo.org/api/index.php
   * https://foo.org/api
-...
 
 API endpoint URLs must *not* contain a question mark ("?") --  as this will be added by the client when building the request URL.
 
@@ -68,9 +67,9 @@ To authenticate, clients must pass their passkey as an additional request parame
 Over a secure, *https* connection, passkeys can be passed via HTTP GET, as in the following:
   * http://foo.org/api?method=time&passkey=bacon420
 
-It is advised though that HTTP POST be used for submitting the 'passkey' parameter to the remote API server.
+It is advised though that HTTP POST be used for submitting the passkey param to the remote API server.
 
-The following example uses curl to call the time method, passing in the passkey via a POST parameter:
+The following example uses curl to call the time method, passing in the passkey via POST:
 {{{
   curl -d "passkey=bacon420" http://foo.org/api?method=time
 }}}
@@ -96,11 +95,11 @@ Example response:
 
 For brevity, in the following examples we will demonstrate using one example request, wherein the passkey is passed via POST.
 
-= List Users ("list_users") =
+= List Users ('list_users') =
 
 Used for both the initial pull of all users (in the case wherein one or more servers have been online for a long time), as well as periodic updates (new user on the remote server who have signed up less than X seconds ago).
 
-== First Load ==
+=== List Users :: First Load ===
 
 The optional parameter "*first_load*" may be passed (value "true") to pull the entire list of users.  It should only be called once; subsequent loads can use time-based diffs.
 
@@ -111,7 +110,6 @@ List users (first load) request:
 
 Sample response:
 {{{
-
 <users>
   <user>
     <login>pedro</login>
@@ -124,6 +122,32 @@ Sample response:
     <salt>275374700.0221938363202334</salt>
   </user>
 </users>
-
 }}}
 
+
+=== List Users :: Since X Seconds Ago ===
+
+The 'list_users' command also takes an optional 'since' parameter which should restrict the server to sending only those users created in the last X seconds.
+
+For example, if we wanted to only receive users created under an hour ago (60*60 or 3600 seconds).
+
+List users (first load) request:
+{{{
+  curl -d "passkey=bacon420" http://foo.org/api?method=list_users&since=3600
+}}}
+
+Sample response:
+{{{
+<users>
+  <user>
+    <login>abygale</login>
+    <hashed_password>63a6a9c5515bc6dbb53ce2af68541b06d563ff6b6f82352af5fb6d909489dea7</hashed_password>
+    <salt>277685200.628751501062818</salt>
+  </user>
+  <user>
+    <login>brianna</login>
+    <hashed_password>cf56544473827e8fde111a05caf30ce4ffd435b6e64ec5f378362ae8ad6e983b</hashed_password>
+    <salt>279805600.660643620734607</salt>
+  </user>
+</users>
+}}}
