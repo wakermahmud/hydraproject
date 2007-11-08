@@ -75,11 +75,9 @@ The following example uses curl to call the time method, passing in the passkey 
   curl -d "passkey=bacon420" http://foo.org/api?method=time
 }}}
 
-= Time Function = 
+= Time Function ("time") = 
 
 This function can be used for debugging and testing (to ensure authentication is working, for example).
-
-*time*
 
 Example request (passkey embedded in URL):
 {{{
@@ -95,3 +93,37 @@ Example response:
 {{{
 <time>Wed Nov 07 19:53:03 -0800 2007</time>
 }}}
+
+For brevity, in the following examples we will demonstrate using one example request, wherein the passkey is passed via POST.
+
+= List Users ("list_users") =
+
+Used for both the initial pull of all users (in the case wherein one or more servers have been online for a long time), as well as periodic updates (new user on the remote server who have signed up less than X seconds ago).
+
+== First Load ==
+
+The optional parameter "*first_load*" may be passed (value "true") to pull the entire list of users.  It should only be called once; subsequent loads can use time-based diffs.
+
+List users (first load) request:
+{{{
+  curl -d "passkey=bacon420" http://foo.org/api?method=list_users&first_load=true
+}}}
+
+Sample response:
+{{{
+
+<users>
+  <user>
+    <login>pedro</login>
+    <hashed_password>590f88589c44380f066c88fd4142716d28c2f3e76f0ba13ef9e6cb3872f81664</hashed_password>
+    <salt>278448800.832002332338702</salt>
+  </user>
+  <user>
+    <login>keith</login>
+    <hashed_password>4738a1db458cab13e5e42c9578d21bed31a900930c179c44746ca8049c87b7a0</hashed_password>
+    <salt>275374700.0221938363202334</salt>
+  </user>
+</users>
+
+}}}
+
