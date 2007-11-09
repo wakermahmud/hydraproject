@@ -254,9 +254,13 @@ Example response:
 
 This method takes a single param *info_hash* which is the hex value of the info_hash of the user-uploaded .torrent file.
 
-This method returns a header of 'Content-Type' = 'application/x-bittorrent'.  The data returned is the raw .torrent file.
+The 'Content-Type' header is set to 'application/x-bittorrent'.
 
-Curl example, wherein the output is written to a file called 'foo.torrent':
+The data sent back is that of the raw .torrent file (a bencoded dictionary).
+
+Curl example:
 {{{
   curl --output foo.torrent -d "passkey=bacon420" http://foo.org/api?method=get_torrent&info_hash=69710247d0673106ff74d190a2c658de66e40a61
 }}}
+
+In the above, the output is written to a file called 'foo.torrent'.
