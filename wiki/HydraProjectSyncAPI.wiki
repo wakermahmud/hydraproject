@@ -191,7 +191,7 @@ hashed_password = Digest::SHA256.hexdigest(password + HARD_SALT + salt)
 puts hashed_password # 'd0d305b4922a65d53d6a4add6233bb2d74b0c40b'
 }}}
 
-*Note*: Be sure to use SHA*256* not SHA1.  =)
+*Note*: Be sure to use *SHA256* not SHA1.  =)
 
 = List Torrents (list_torrents) =
 
