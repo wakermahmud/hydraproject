@@ -30,7 +30,7 @@ Required fields:
   * domain - domain name of the remote server
   * passkey - secret password key used for authentication
   * api_url - fully qualified URL of the remote API endpoint (note: secure connections "https" are allowed and encouraged if possible)
-  * announce_url - a template for the announce URL, which includes a template variable "{{passkey}}" which should be substituted with the downloading user's actual passkey
+  * announce_url - a template for the announce URL, which includes a template variable "{{passkey}}".  When the actual .torrent file is downloaded by a user, the bencoded 'announce-list' will contain these announce_urls, only with the "{{passkey}}" template var substituted with the actual downloading user's passkey.
 
 Optional field(s):
   * ip_required - The IP Address of the remote client.  If a different IP than the one listed attempts to make a request, it should be denied.
