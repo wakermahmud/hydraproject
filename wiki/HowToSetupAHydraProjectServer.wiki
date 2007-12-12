@@ -1,0 +1,120 @@
+#summary Describes how to setup a Hydra Project Server.
+#labels rails,Featured,nginx,setup,thp
+
+= Work in Progress =
+
+This page is a work in progress...
+
+= How to Setup a Hydra Project Server =
+
+Grab the trunk:
+{{{
+ svn checkout http://hydraproject.googlecode.com/svn/trunk/ current
+}}}
+
+Will check the code out into 'current' (cd into it), then...
+{{{
+ cd config
+}}}
+
+== Database Config ==
+
+{{{  
+  cp database.yml.example database.yml
+  vi database.yml
+}}}
+
+Edit the 'production' entry.
+
+If you're creating a datbase by hand in MySQL console:
+{{
+CREATE DATABASE hydra;
+GRANT ALL PRIVILEGES ON hydra.* TO 'hydra_user'@'localhost' IDENTIFIED BY '2manyseekrets';
+# If you need to be able to connect from other (all) hosts)
+#GRANT ALL PRIVILEGES ON hydra.* TO 'hydra_user'@'%' IDENTIFIED BY '2manyseekrets';
+
+_Captain obvious sez, please change the password/etc to one of your own choosing._
+
+The database.yml for the above would look like:
+{{
+production:
+  adapter: mysql
+  database: hydra
+  username: hydra_user
+  password: 2manyseekrets
+  # Uncomment & tweak this line if you're having DB connection issues:
+  #socket: /var/lib/mysql/mysql.sock 
+}}}
+
+== Site Config ==
+
+  Edit the config file.  Some of the domain name entries seem redundant; this is in case you want to run the site on a port other than 80 (i.e. foo.org:6969)
+
+{{{
+ cp config.yml.example config.yml
+ vi config.yml
+}}}
+
+== Federated Sites Config ==
+
+These are the list of trusted sites that are in your network, or "federation".  _(gotta love the Star Trek reference)_
+
+{{{
+ cp federation.yml.example federation.yml
+ vi federation.yml
+}}}
+
+Edit the credentials, note: you do not need to specify (self), i.e. the server you are configuring.  You only specify trusted peer sites.
+
+== Get Mongrel ==
+
+Install the gem via:
+
+{{{
+ gem install mongrel
+}}}
+
+== Mongrel Cluster Config ==
+
+Create a new mongrel cluster config file in your favorite text editor:
+
+{{{
+vi mongrel_cluster.yml
+}}}
+
+Example contents of your mongrel_cluster.yml file:
+
+{{{
+---
+cwd: /u/apps/torrentdope/current
+port: "3000"
+environment: production
+address: 127.0.0.1
+pid_file: log/mongrel.pid
+servers: 2
+}}}
+
+The more popular your site will be, the more mongrels you will need.  (Note: 6-8 should be plenty for a site with anywhere from 5,000 - 15,000 visitors per day)
+
+== Run the Migrations ==
+
+Change directories back to your rails root and run the migrations:
+
+{{{
+rake db:migrate RAILS_ENV=production
+}}}
+
+== Start the Mongrels ==
+
+Still in rails root, run:
+{{{
+mongrel_rails cluster::start
+}}}
+
+You should now have 2 instances running, one at localhost:3000, the other at localhost:3001.  Use apache, nginx, etc. to proxy from port 80 to these mongrels.
+
+[http://blog.codahale.com/2006/06/19/time-for-a-grown-up-server-rails-mongrel-apache-capistrano-and-you/ Time for a Grownup Server] has a good guide on getting Apache playing nice with mongrel.
+
+I actually prefer nginx (it's a lightweight web server, like apache, but only uses about 6mb of memory and is blazing fast), but it's less well-known so support may be harder to come by if you hit a snag.
+
+[http://brainspl.at/articles/2006/09/12/new-nginx-conf-with-rails-caching New nginx Config with Rails Caching]
