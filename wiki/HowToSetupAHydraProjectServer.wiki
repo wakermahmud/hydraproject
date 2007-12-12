@@ -27,16 +27,18 @@ Will check the code out into 'current' (cd into it), then...
 Edit the 'production' entry.
 
 If you're creating a datbase by hand in MySQL console:
-{{
+
+{{{
 CREATE DATABASE hydra;
 GRANT ALL PRIVILEGES ON hydra.* TO 'hydra_user'@'localhost' IDENTIFIED BY '2manyseekrets';
 # If you need to be able to connect from other (all) hosts)
 #GRANT ALL PRIVILEGES ON hydra.* TO 'hydra_user'@'%' IDENTIFIED BY '2manyseekrets';
+}}}
 
 _Captain obvious sez, please change the password/etc to one of your own choosing._
 
 The database.yml for the above would look like:
-{{
+{{{
 production:
   adapter: mysql
   database: hydra
