@@ -7,7 +7,7 @@
 
 We'll assume you already have Ruby 1.8.x installed and are on some flavor of linux/unix system. (linux, OS X, BSD, etc)
 
-Also assumed that you have rubygems installed.
+Also assumes that you have rubygems installed.
 
 == Get Rails and Mongrel ==
 
