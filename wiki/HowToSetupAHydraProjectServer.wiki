@@ -5,7 +5,7 @@
 
 == Prerequisites ==
 
-We'll assume you already have Ruby 1.8.x installed and are on some flavor of *nix system. (linux, OS X, BSD, etc)
+We'll assume you already have Ruby 1.8.x installed and are on some flavor of nix system. (linux, OS X, BSD, etc)
 
 Also assumed that you have rubygems installed.
 
