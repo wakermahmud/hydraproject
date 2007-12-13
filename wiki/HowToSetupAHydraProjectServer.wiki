@@ -163,11 +163,14 @@ mongrel_rails cluster::start
 
 You should now have 2 instances running, one at localhost:3000, the other at localhost:3001.  Use apache, nginx, etc. to proxy from port 80 to these mongrels.
 
+== Proxying to Mongrel via Apache/nginx ==
+
 [http://blog.codahale.com/2006/06/19/time-for-a-grown-up-server-rails-mongrel-apache-capistrano-and-you/ Time for a Grownup Server] has a good guide on getting Apache playing nice with mongrel.
 
-[http://brainspl.at/articles/2006/09/12/new-nginx-conf-with-rails-caching New nginx Config with Rails Caching]
-[http://docs.planetargon.com/Nginx_Configuration/ Setting up nginx at Planet Argon Hosting]
+*nginx* - the lightweight alternative. [http://nginx.net/ nginx] is a lightweight webserver built for speed and configurability.  Addons are pushed into modules, keeping the core nimble and zippy.
 
-I actually prefer nginx (it's a lightweight web server (used in place of apache), but only uses about 6mb of memory and is blazing fast), but it's less well-known so support may be harder to come by if you hit a snag.
+[http://brainspl.at/articles/2006/09/12/new-nginx-conf-with-rails-caching New nginx Config with Rails Caching]
+
+[http://docs.planetargon.com/Nginx_Configuration/ Setting up nginx at Planet Argon Hosting]
 
 Best of luck on getting a server setup -- feel free to drop by [http://groups.google.com/group/the-hydra-project the Google Group] if you hit any snags along the way.
