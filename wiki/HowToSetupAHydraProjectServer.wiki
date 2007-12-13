@@ -132,13 +132,21 @@ Example contents of your mongrel_cluster.yml file:
 
 {{{
 ---
-cwd: /u/apps/torrentdope/current
+cwd: /u/apps/hydra
 port: "3000"
 environment: production
 address: 127.0.0.1
 pid_file: log/mongrel.pid
 servers: 2
 }}}
+
+The above mongrel config assumes the following.
+
+Your application's RAILS_ROOT: /u/apps/hydra
+Your application's environment: production
+Ports your app will be started on: 3000 and 3001
+
+If you specified "servers: 6" the ports would be 3000 - 3005.
 
 The more popular your site will be, the more mongrels you will need.  (Note: 6-8 should be plenty for a site with anywhere from 5,000 - 15,000 visitors per day)
 
@@ -165,3 +173,5 @@ You should now have 2 instances running, one at localhost:3000, the other at loc
 [http://docs.planetargon.com/Nginx_Configuration/ Setting up nginx at Planet Argon Hosting]
 
 I actually prefer nginx (it's a lightweight web server (used in place of apache), but only uses about 6mb of memory and is blazing fast), but it's less well-known so support may be harder to come by if you hit a snag.
+
+Best of luck on getting a server setup -- feel free to drop by [http://groups.google.com/group/the-hydra-project the Google Group] if you hit any snags along the way.
