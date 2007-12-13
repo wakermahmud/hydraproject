@@ -1,10 +1,6 @@
 #summary Describes how to setup a Hydra Project Server.
 #labels rails,Featured,nginx,setup,thp
 
-== Work in Progress ==
-
-*Obligatory Disclaimer*: This page is a work in progress... 
-
 = How to Setup a Hydra Project Server =
 
 == Prerequisites ==
