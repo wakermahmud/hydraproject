@@ -28,7 +28,7 @@ Also assumed that you have rubygems installed.
 
 [http://nubyonrails.com/ Geoffrey Grosenbach] has made this excellent memcached installer script for OS X systems.
 
-_Warning -- again, use the following installer script at your own risk.  Take a peek at it after downloading to make sure it's not really doing an rm -rf /_
+_Warning -- again, use the following installer script at your own risk.  Take a peek at it after downloading and do a quick sanity check on it._
 
 How to get and run the script:
 {{{
