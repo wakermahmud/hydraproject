@@ -138,9 +138,9 @@ servers: 2
 
 The above mongrel config assumes the following.
 
-Your application's RAILS_ROOT: /u/apps/hydra
-Your application's environment: production
-Ports your app will be started on: 3000 and 3001
+  * Your application's RAILS_ROOT: /u/apps/hydra
+  * Your application's environment: production
+  * Ports your app will be started on: 3000 and 3001
 
 If you specified "servers: 6" the ports would be 3000 - 3005.
 
