@@ -18,6 +18,7 @@ Also assumed that you have rubygems installed.
 {{{
  gem install rails
  gem install mongrel
+ gem install mongrel_cluster
 }}}
 
 == Install Memcached ==
@@ -118,14 +119,6 @@ These are the list of trusted sites that are in your network, or "federation".  
 }}}
 
 Edit the credentials, note: you do not need to specify (self), i.e. the server you are configuring.  You only specify trusted peer sites.
-
-== Get Mongrel ==
-
-Install the gem via:
-
-{{{
- gem install mongrel
-}}}
 
 == Mongrel Cluster Config ==
 
