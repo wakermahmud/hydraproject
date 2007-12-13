@@ -53,14 +53,19 @@ You might encounter some dependency issues -- i.e. even after installing a depen
 
 == Get the Code ==
 
-Grab the trunk:
+If you would like to be able to 'svn up' and pull latest changes, do an svn checkout:
 {{{
- svn checkout http://hydraproject.googlecode.com/svn/trunk/ current
+ svn checkout http://hydraproject.googlecode.com/svn/trunk/ hydra
 }}}
 
-Will check the code out into 'current' (cd into it), then...
+To export the project (no .svn directories, no easy update mechanism):
 {{{
- cd config
+ svn export http://hydraproject.googlecode.com/svn/trunk/ hydra
+}}}
+
+This will put the code out into a directory 'hydra'.  Cd into the app's config dir:
+{{{
+ cd hydra/config
 }}}
 
 == Database Config ==
@@ -72,16 +77,16 @@ Will check the code out into 'current' (cd into it), then...
 
 Edit the 'production' entry.
 
-If you're creating a datbase by hand in MySQL console:
+If you're creating a database by hand in MySQL console:
 
 {{{
 CREATE DATABASE hydra;
 GRANT ALL PRIVILEGES ON hydra.* TO 'hydra_user'@'localhost' IDENTIFIED BY '2manyseekrets';
-# If you need to be able to connect from other (all) hosts)
+# If you need to be able to connect from other (all) hosts, run:
 #GRANT ALL PRIVILEGES ON hydra.* TO 'hydra_user'@'%' IDENTIFIED BY '2manyseekrets';
 }}}
 
-_Captain obvious sez, please change the password/etc to one of your own choosing._
+_Captain obvious sez, use your own db user / password of course =)._
 
 The database.yml for the above would look like:
 {{{
