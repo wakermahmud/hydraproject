@@ -12,9 +12,9 @@ Also assumes that you have rubygems installed.
 == Get Rails and Mongrel ==
 
 {{{
- gem install rails
- gem install mongrel
- gem install mongrel_cluster
+ sudo gem install rails
+ sudo gem install mongrel
+ sudo gem install mongrel_cluster
 }}}
 
 == Install Memcached ==
@@ -47,6 +47,14 @@ cd memcached-1.2.4
 }}}
 
 You might encounter some dependency issues -- i.e. even after installing a dependency, memcached can't find it when compiling.  Ask for help in the forums if you get stuck.
+
+== Install the Memcached Ruby Gem ==
+
+Once you have memcached installed, next you'll need to install the ruby memcache-client gem:
+
+{{{
+ sudo gem install memcache-client
+}}}
 
 == Get the Code ==
 
