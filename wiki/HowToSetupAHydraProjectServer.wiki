@@ -173,4 +173,9 @@ You should now have 2 instances running, one at localhost:3000, the other at loc
 
 [http://docs.planetargon.com/Nginx_Configuration/ Setting up nginx at Planet Argon Hosting]
 
+== Adding Sync Cron Jobs ==
+
+See ExampleCronJob for how to setup cron jobs that will automatically sync with other servers in your trusted network.
+
+
 Best of luck on getting a server setup -- feel free to drop by [http://groups.google.com/group/the-hydra-project the Google Group] if you hit any snags along the way.
