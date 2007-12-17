@@ -4,10 +4,10 @@
 = Example Cron Job =
 
 The following cron job assumes the following:
-* App RAILS_ROOT: /u/apps/hydra/current
-* App environment: production
-* Sync users/torrents every 5 minutes
-* Sync transfer stats daily @ 1am
+ * App RAILS_ROOT: /u/apps/hydra/current
+ * App environment: production
+ * Sync users/torrents every 5 minutes
+ * Sync transfer stats daily @ 1am
 
 {{{
 
