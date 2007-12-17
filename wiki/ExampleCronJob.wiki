@@ -9,6 +9,8 @@ The following cron job assumes the following:
  * Sync users/torrents every 5 minutes
  * Sync transfer stats daily @ 1am
 
+The cron job:
+
 {{{
 
 # Sync Users and Torrents Every 5 Minutes
@@ -17,4 +19,16 @@ The following cron job assumes the following:
 # General Daily Cron - Sync transfer stats @ 1am
 0 1 * * * RAILS_ENV=production /usr/bin/ruby /u/apps/hydra/current/script/runner -e production 'Sync.sync_daily' > /dev/null 
 
+}}}
+
+[http://www.unixgeeks.org/security/newbie/unix/cron-1.html See Here] for a crontab tutorial.
+
+Normally the workflow is just:
+{{{
+crontab -e
+# Opens up your default text editor -- paste in your cron jobs
+# Save the file and exit, and your new cron jobs should now be installed
+
+# View your cron list with:
+crontab -l
 }}}
