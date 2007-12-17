@@ -3,7 +3,7 @@
 
 = Example Cron Job =
 
-The following cron job assumes the following:
+The following cron job assumes that:
  * App RAILS_ROOT: /u/apps/hydra/current
  * App environment: production
  * Sync users/torrents every 5 minutes
